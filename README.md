@@ -6,6 +6,18 @@ Company Overview
 Radiant Insights is a fictional esports analytics company.
 The project focuses on analyzing Dota 2 match data to understand player performance, hero popularity, item usage, and match outcomes.
 
+## Dataset
+The dataset used in this project comes from Kaggle:
+[Dota 2 Matches (50k)](https://www.kaggle.com/datasets/devinanzelmo/dota-2-matches)
+
+Due to size limits, the dataset is not stored in this repository.  
+To use it:
+1. Download the dataset from Kaggle.
+2. Extract all CSV files.
+3. Place them in a local folder (e.g., `datasets/`).
+4. Run `import.sql` to load the CSVs into PostgreSQL.
+
+
 Project Description
 The dataset comes from Kaggle (Dota 2 Matches, 50k rows). It contains information about:
 
@@ -71,3 +83,4 @@ python main.py
 
 Author Dalu
 Astana IT university 
+

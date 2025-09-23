@@ -1,0 +1,18 @@
+\COPY cluster_regions FROM 'C:\Users\datasets\dota2\cluster_regions.csv' CSV HEADER;
+\COPY heroes FROM 'C:\Users\datasets\dota2\hero_names.csv' CSV HEADER;
+\COPY items FROM 'C:\Users\datasets\dota2\item_ids.csv' CSV HEADER;
+\COPY ability_ids FROM 'C:\Users\datasets\dota2\ability_ids.csv' CSV HEADER;
+\COPY match FROM 'C:\Users\datasets\dota2\/match.csv' CSV HEADER NULL 'nan';
+\COPY players FROM 'C:\Users\datasets\dota2\players.csv' CSV HEADER NULL 'nan';
+\COPY ability_upgrades FROM 'C:\Users\datasets\dota2\ability_upgrades.csv' CSV HEADER NULL 'nan';
+\COPY purchase_log FROM 'C:\Users\datasets\dota2\purchase_log.csv' CSV HEADER NULL 'nan';
+\COPY teamfights FROM 'C:\Users\datasets\dota2\teamfights.csv' CSV HEADER NULL 'nan';
+\COPY teamfights_players FROM 'C:\Users\datasets\dota2\teamfights_players.csv' CSV HEADER NULL 'nan';
+\COPY objectives FROM 'C:\Users\datasets\dota2\objectives.csv' CSV HEADER NULL 'nan';
+\COPY chat(match_id, key, slot, time, unit)FROM 'C:\Users\datasets\dota2\chat.csv' CSV HEADER NULL '' ENCODING 'WIN1251';
+\COPY patch_dates FROM 'C:\Users\datasets\dota2\patch_dates.csv' CSV HEADER NULL 'nan';
+\COPY player_ratings FROM 'C:\Users\datasets\dota2\player_ratings.csv' CSV HEADER NULL 'nan';
+\COPY player_time FROM 'C:\Users\datasets\dota2\player_time.csv' CSV HEADER NULL 'nan';
+\COPY match_outcomes FROM 'C:\Users\datasets\dota2\match_outcomes.csv' CSV HEADER;
+\COPY test_labels FROM 'C:\Users\datasets\dota2\test_labels.csv' CSV HEADER;
+\COPY test_player FROM 'C:\Users\datasets\dota2\test_player.csv' CSV HEADER;

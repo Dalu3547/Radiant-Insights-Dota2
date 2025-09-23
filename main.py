@@ -1,8 +1,8 @@
 import psycopg2
 
 DB_NAME = "dota2"
-DB_USER = "postgres"
-DB_PASS = "dalu"
+DB_USER = "postgres" #put your database username 
+DB_PASS = "password" #put your database password
 DB_HOST = "localhost"
 DB_PORT = "5433"
 

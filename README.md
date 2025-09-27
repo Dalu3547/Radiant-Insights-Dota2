@@ -52,8 +52,8 @@ Radiant-Insights-Dota2/
 ##  Database Setup  
 
 1. **Create the database**  
-   sql
-   CREATE DATABASE dota2;
+   ```sql
+   CREATE DATABASE dota2;```
 
 2.  Apply schema (create tables)
  ```psql -U postgres -d dota2 -p 5433 -f schema.sql```
@@ -65,7 +65,7 @@ Radiant-Insights-Dota2/
  ```\dt
    SELECT * FROM match LIMIT 5;```   
 
-**Example SQL Queries**
+Example SQL Queries
 
 Here are a few of the 10 queries included in queries.sql:
 
@@ -95,6 +95,7 @@ Here are a few of the 10 queries included in queries.sql:
 
 Author Dalu
 Astana IT university 
+
 
 
 

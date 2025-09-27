@@ -62,10 +62,10 @@ Radiant-Insights-Dota2/
  ```psql -U postgres -d dota2 -p 5433 -f import.sql```
 
 4. Verify the tables
- ```\dt
-   SELECT * FROM match LIMIT 5;```   
+```\dt```
+ ```SELECT * FROM match LIMIT 5;```   
 
-Example SQL Queries
+**Example SQL Queries**
 
 Here are a few of the 10 queries included in queries.sql:
 

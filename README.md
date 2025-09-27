@@ -50,7 +50,9 @@ Radiant-Insights-Dota2/
 │── main.py # Python script that runs queries
 
 │── ERD.png # Database ER diagram
+
 │── images/ # Query result screenshots
+
 │── README.md # Project documentation
 
 
@@ -96,6 +98,7 @@ Here are a few of the 10 queries included in queries.sql:
 
 Author Dalu
 Astana IT university 
+
 
 
 

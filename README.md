@@ -7,7 +7,8 @@ Radiant Insights is a fictional esports analytics company.
 The project focuses on analyzing Dota 2 match data to understand player performance, hero popularity, item usage, and match outcomes.
 
 
-Put ERD picture
+<img width="5334" height="3000" alt="ERD" src="https://github.com/user-attachments/assets/82352546-217d-415b-ba2b-a7610c3b0cce" />
+
 
 ## Dataset
 The dataset used in this project comes from Kaggle:
@@ -86,5 +87,6 @@ python main.py
 
 Author Dalu
 Astana IT university 
+
 
 

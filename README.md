@@ -10,6 +10,10 @@ This project analyzes **50,000 Dota 2 matches** from a Kaggle dataset to study:
 
 ---
 
+**ER Diagram**
+<img width="5334" height="3000" alt="ERD" src="https://github.com/user-attachments/assets/04776b35-6b2e-430a-bb24-6c46f8c9aeeb" />
+
+
 ## 📊 Dataset  
 The dataset is available on Kaggle:  
 👉 [Dota 2 Matches (50k)](https://www.kaggle.com/datasets/devinanzelmo/dota-2-matches)  
@@ -87,6 +91,7 @@ Here are a few of the 10 queries included in queries.sql:
 
 Author Dalu
 Astana IT university 
+
 
 
 

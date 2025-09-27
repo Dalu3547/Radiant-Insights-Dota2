@@ -40,10 +40,15 @@ To use it:
 ## 📂 Repository Contents  
 
 Radiant-Insights-Dota2/
+
 │── schema.sql # CREATE TABLE statements
+
 │── import.sql # \COPY commands for importing CSVs
+
 │── queries.sql # 10 SQL queries with explanations
+
 │── main.py # Python script that runs queries
+
 │── ERD.png # Database ER diagram
 │── images/ # Query result screenshots
 │── README.md # Project documentation
@@ -91,6 +96,7 @@ Here are a few of the 10 queries included in queries.sql:
 
 Author Dalu
 Astana IT university 
+
 
 
 

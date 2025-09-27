@@ -73,18 +73,18 @@ Here are a few of the 10 queries included in queries.sql:
 ```SELECT * FROM match LIMIT 10;```
 
 2. Players with more than 10 kills
-```SELECT account_id, kills, deaths, assists
+```SELECT account_id, kills, deaths, assists```
    FROM players
    WHERE kills > 10
-   LIMIT 5; ```
+```LIMIT 5; ```
 
 3. Top 10 most picked heroes
-```SELECT h.localized_name, COUNT(*) AS picks
+```SELECT h.localized_name, COUNT(*) AS picks```
    FROM players p
    JOIN hero_names h ON p.hero_id = h.hero_id
    GROUP BY h.localized_name
    ORDER BY picks DESC
-   LIMIT 10;```
+```LIMIT 10;```
 
  **Running the Python Script**
 1. Install dependencies:
@@ -95,6 +95,7 @@ Here are a few of the 10 queries included in queries.sql:
 
 Author Dalu
 Astana IT university 
+
 
 
 

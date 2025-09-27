@@ -1,92 +1,101 @@
-# Radiant-Insights-Dota2
-Analytics of Dota 2 Matches dataset
+# Radiant Insights — Dota 2 Analytics  
 
-Company Overview
+## 📖 Overview  
+Radiant Insights is a fictional **esports analytics company**.  
+This project analyzes **50,000 Dota 2 matches** from a Kaggle dataset to study:  
+- Player performance (kills, assists, GPM, etc.)  
+- Hero popularity  
+- Item usage  
+- Match outcomes and team trends  
 
-Radiant Insights is a fictional esports analytics company.
-The project focuses on analyzing Dota 2 match data to understand player performance, hero popularity, item usage, and match outcomes.
+---
+
+## 📊 Dataset  
+The dataset is available on Kaggle:  
+👉 [Dota 2 Matches (50k)](https://www.kaggle.com/datasets/devinanzelmo/dota-2-matches)  
+
+⚠️ The dataset is **too large for GitHub**, so it is **not stored in this repository**.  
+
+To use it:  
+1. Download the dataset from Kaggle.  
+2. Extract all CSV files.  
+3. Place them in a local folder (e.g., `datasets/`).  
+4. Run `import.sql` to load the data into PostgreSQL.  
+
+---
+
+## 🛠 Tools Used  
+- **PostgreSQL** → database  
+- **pgAdmin / psql** → database management  
+- **Python 3.x + psycopg2** → run queries programmatically  
+- **dbdiagram.io** → create ER diagram  
+- **GitHub** → repository & documentation  
+
+---
+
+## 📂 Repository Contents  
+
+Radiant-Insights-Dota2/
+│── schema.sql # CREATE TABLE statements
+│── import.sql # \COPY commands for importing CSVs
+│── queries.sql # 10 SQL queries with explanations
+│── main.py # Python script that runs queries
+│── ERD.png # Database ER diagram
+│── images/ # Query result screenshots
+│── README.md # Project documentation
 
 
-<img width="5334" height="3000" alt="ERD" src="https://github.com/user-attachments/assets/82352546-217d-415b-ba2b-a7610c3b0cce" />
+---
 
+#  Project Documentation  
 
-## Dataset
-The dataset used in this project comes from Kaggle:
-[Dota 2 Matches (50k)](https://www.kaggle.com/datasets/devinanzelmo/dota-2-matches)
+##  Database Setup  
 
-Due to size limits, the dataset is not stored in this repository.  
-To use it:
-1. Download the dataset from Kaggle.
-2. Extract all CSV files.
-3. Place them in a local folder (e.g., `datasets/`).
-4. Run `import.sql` to load the CSVs into PostgreSQL.
+1. **Create the database**  
+   ```sql
+   CREATE DATABASE dota2;```
 
+2.  Apply schema (create tables)
+ ```psql -U postgres -d dota2 -p 5433 -f schema.sql```
 
-Project Description
-The dataset comes from Kaggle (Dota 2 Matches, 50k rows). It contains information about:
+3.  Import data from CSVs
+ ```psql -U postgres -d dota2 -p 5433 -f import.sql```
 
-Matches and outcomes
-Players and statistics
-Heroes, items, and abilities
-Teamfights and objectives
-Chat messages
+4. Verify the tables
+ ```\dt
+   SELECT * FROM match LIMIT 5;```   
 
-This project builds a PostgreSQL database, imports the dataset, creates an ER diagram, and runs SQL analytics. A Python script is also included to connect to the database and execute queries.
+**Example SQL Queries**
 
-Tools Used:
+Here are a few of the 10 queries included in queries.sql:
 
-PostgreSQL
-pgAdmin / psql
-Python 3.x + psycopg2
-dbdiagram.io (for ERD)
-GitHub (repository)
+1. First 10 matches
+```SELECT * FROM match LIMIT 10;```
 
-Repository Contents:
+2. Players with more than 10 kills
+```SELECT account_id, kills, deaths, assists
+   FROM players
+   WHERE kills > 10
+   LIMIT 5; ```
 
-datasets → dota 2 datasets
-Images → images of query
-schema.sql → table definitions
-import.sql → data import commands
-queries.sql → 10 SQL queries with comments
-main.py → Python script for running queries
-ERD.png → ER diagram
-README.md → documentation
+3. Top 10 most picked heroes
+```SELECT h.localized_name, COUNT(*) AS picks
+   FROM players p
+   JOIN hero_names h ON p.hero_id = h.hero_id
+   GROUP BY h.localized_name
+   ORDER BY picks DESC
+   LIMIT 10;```
 
-Database Setup:
-CREATE DATABASE dota2;
+ **Running the Python Script**
+1. Install dependencies:
+```pip install psycopg2-binary```
 
-Apply schema:
-```psql -U postgres -d dota2 -p 5433 -f schema.sql```
-
-Import data:
-```psql -U postgres -d dota2 -p 5433 -f import.sql```
-
-Verify:
-```Select * from match limit 5;```
-
-Queries
-
-The following queries were written and tested:
-
-First 10 matches.
-Players with more than 10 kills.
-Top 10 most picked heroes.
-Average match duration.
-Radiant vs Dire wins.
-Top 5 purchased items.
-Average kills per player.
-Matches with most chat messages.
-Top 5 accounts by kills.
-Average GPM by hero.
-
-Running Python Script
-pip install psycopg2-binary 
-
-Run:
-python main.py
+2. Run the script:
+```python main.py```
 
 Author Dalu
 Astana IT university 
+
 
 
 

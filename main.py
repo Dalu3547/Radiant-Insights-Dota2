@@ -1,17 +1,51 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.express as px
 from sqlalchemy import create_engine
 
 # ==============================
 # Database Connection
 # ==============================
 DB_USER = "postgres"
-DB_PASS = "password"       # change if needed
+DB_PASS = "dalu"       # change if needed
 DB_HOST = "localhost"
 DB_PORT = "5433"
 DB_NAME = "dota2"
 
 engine = create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+
+# Query: GPM by hero over months
+query = """
+SELECT DATE_TRUNC('month', to_timestamp(m.start_time)) AS month,
+       h.localized_name AS hero,
+       ROUND(AVG(p.gold_per_min), 2) AS avg_gpm
+FROM players p
+JOIN match m ON p.match_id = m.match_id
+JOIN hero_names h ON p.hero_id = h.hero_id
+GROUP BY month, h.localized_name
+ORDER BY month, avg_gpm DESC;
+"""
+df = pd.read_sql(query, engine)
+
+# Interactive scatter plot with time slider
+fig = px.scatter(
+    df,
+    x="hero",
+    y="avg_gpm",
+    color="hero",
+    size="avg_gpm",
+    animation_frame=df["month"].dt.strftime("%Y-%m"),
+    range_y=[0, df["avg_gpm"].max() * 1.1],
+    title="Average GPM per Hero Over Time"
+)
+
+fig.update_layout(
+    xaxis_title="Hero",
+    yaxis_title="Average GPM",
+    xaxis={'categoryorder':'total descending'}
+)
+
+fig.show()
 
 # ==============================
 # 1) Pie Chart – Radiant vs Dire Wins
@@ -74,27 +108,31 @@ plt.tight_layout()
 plt.savefig("charts/hbar_top_accounts.png", dpi=150)
 plt.close()
 
-print(f"✅ Horizontal bar chart saved: Top 5 items ({len(df3)} rows)")
+print(f"✅ Horizontal bar chart saved: Top 10 accounts ({len(df3)} rows)")
 
 # ==============================
-# 4) Line Chart – Matches with Most Chat Messages
+# 4) Line Chart – Average Match Duration Over Time
 # ==============================
 query4 = """
-SELECT match_id, COUNT(*) AS chat_count
-FROM chat
-GROUP BY match_id
-ORDER BY chat_count DESC
-LIMIT 5;
+SELECT (to_timestamp(start_time) AT TIME ZONE 'UTC')::date AS match_date,
+       ROUND(AVG(duration),2) AS avg_duration
+FROM match
+GROUP BY (to_timestamp(start_time) AT TIME ZONE 'UTC')::date
+ORDER BY (to_timestamp(start_time) AT TIME ZONE 'UTC')::date;
 """
 df4 = pd.read_sql(query4, engine)
-df4.plot(kind="line", x="match_id", y="chat_count", marker="o", figsize=(10,6), color="green")
-plt.title("Top 5 Matches by Chat Activity")
-plt.xlabel("Match ID")
-plt.ylabel("Number of Chat Messages")
+
+plt.figure(figsize=(12,6))
+plt.plot(df4["match_date"], df4["avg_duration"], marker="o", linestyle="-", color="green")
+plt.title("Average Match Duration Over Time")
+plt.xlabel("Date")
+plt.ylabel("Average Duration (seconds)")
+plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig("charts/line_chat_activity.png", dpi=150)
+plt.savefig("charts/line_avg_duration_time.png", dpi=150)
 plt.close()
-print(f"✅ Line chart saved: Chat activity ({len(df4)} rows)")
+print(f"✅ Line chart saved: Avg match duration over time ({len(df4)} rows)")
+
 
 # ==============================
 # 5) Histogram – Distribution of Player Kills

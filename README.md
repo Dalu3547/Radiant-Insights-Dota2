@@ -49,9 +49,15 @@ Radiant-Insights-Dota2/
 
 │── main.py # Python script that runs queries
 
+│── analytics.py     # Charts & Excel export
+
 │── ERD.png # Database ER diagram
 
 │── images/ # Query result screenshots
+
+│── analytics.py     # Charts & Excel export
+
+│── charts/          # Saved charts (PNG images)
 
 │── README.md # Project documentation
 
@@ -89,15 +95,39 @@ Here are a few of the 10 queries included in queries.sql:
 3. Top 10 most picked heroes
 ```SELECT h.localized_name, COUNT(*) AS picks FROM players p JOIN hero_names h ON p.hero_id = h.hero_id GROUP BY h.localized_name ORDER BY picks DESC LIMIT 10;```
 
+📈 Visualizations
+
+Using analytics.py, SQL queries were transformed into charts:
+
+🥧 Radiant vs Dire win ratio (Pie chart)
+
+📊 Most picked heroes (Bar chart)
+
+📉 Match duration trends (Line chart)
+
+📜 Chat activity per match (Linechart)
+
+🛒 Top purchased items (Horizontal bar chart)
+
+⚔️ Distribution of player kills (Histogram)
+
+💰 Avg GPM by hero (Scatter plot)
+
+All charts are saved inside the charts/ folder.
+
  **Running the Python Script**
 1. Install dependencies:
-```pip install psycopg2-binary```
+```pip install psycopg2-binary pandas matplotlib sqlalchemy openpyxl```
 
 2. Run the script:
 ```python main.py```
 
+3. Generate charts & Excel
+```python analytics.py```
+
 Author Dalu
 Astana IT university 
+
 
 
 

@@ -5,7 +5,7 @@ import psycopg2
 # ==============================
 DB_NAME = "dota2"
 DB_USER = "postgres"   # change if needed
-DB_PASS = "dalu"       # change if needed
+DB_PASS = "password"       # change if needed
 DB_HOST = "localhost"
 DB_PORT = "5433"
 
@@ -111,3 +111,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

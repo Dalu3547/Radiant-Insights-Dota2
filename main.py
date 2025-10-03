@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 # Database Connection
 # ==============================
 DB_USER = "postgres"
-DB_PASS = "dalu"       # change if needed
+DB_PASS = "password"       # change if needed
 DB_HOST = "localhost"
 DB_PORT = "5433"
 DB_NAME = "dota2"

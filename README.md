@@ -125,8 +125,43 @@ All charts are saved inside the charts/ folder.
 3. Generate charts & Excel
 ```python analytics.py```
 
+# ⚙️ Prometheus & Grafana Monitoring Assignment
+
+## 📖 Overview
+This project sets up a complete **monitoring system** using Docker Compose.  
+It collects and visualizes metrics from:
+- PostgreSQL database (`dota2`)
+- Node Exporter (system metrics)
+- Custom Exporter (OpenWeather API data)
+
+Three Grafana dashboards were created:
+1. **Database Monitoring** – PostgreSQL performance
+2. **System Monitoring** – CPU, memory, disk, network
+3. **External API Monitoring** – weather metrics
+
+---
+
+## 🧩 Components
+
+| Service | Description | Port |
+|----------|--------------|------|
+| PostgreSQL | Database containing the Dota 2 dataset | 5433 |
+| Postgres Exporter | Exposes PostgreSQL metrics | 9187 |
+| Node Exporter | Host system metrics | 9100 |
+| Custom Exporter | Collects weather data from OpenWeather API | 9000 |
+| Prometheus | Scrapes & stores metrics | 9090 |
+| Grafana | Visualizes metrics | 3000 |
+
+---
+
+## 🚀 How to Run
+
+```bash
+docker-compose up -d --build
+
 Author Dalu
 Astana IT university 
+
 
 
 

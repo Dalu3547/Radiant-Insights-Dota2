@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: dota_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: dota_user
+      POSTGRES_PASSWORD: dota_pass
+      POSTGRES_DB: dota2
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  postgres_exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: dota_postgres_exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "postgresql://dota_user:dota_pass@dota_postgres:5432/dota2?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - postgres
+
+  node_exporter:
+    image: prom/node-exporter
+    container_name: dota_node_exporter
+    ports:
+      - "9100:9100"
+    restart: always
+
+  custom_exporter:
+    build: ./exporters/custom
+    container_name: custom_exporter
+    ports:
+      - "9000:9000"
+    restart: always
+
+  prometheus:
+    image: prom/prometheus
+    container_name: dota_prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    restart: always
+    depends_on:
+      - postgres_exporter
+      - node_exporter
+      - custom_exporter
+
+  grafana:
+    image: grafana/grafana
+    container_name: dota_grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana   
+
+volumes:
+  pgdata:
+  grafana_data:
